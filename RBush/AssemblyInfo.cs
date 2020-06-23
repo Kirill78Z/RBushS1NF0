@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("RBush.Test" + RBush.AssemblyInfo.PublicKey)]
+[assembly: InternalsVisibleTo("RBush.Test2" + RBush.AssemblyInfo.PublicKey)]
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

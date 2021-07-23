@@ -6,7 +6,7 @@ using Xunit;
 
 namespace RBushKnn.Test
 {
-    public class RBushKnnTests
+    public class KnnToPointTests
     {
 		static double[,] data =
 		{
@@ -34,7 +34,7 @@ namespace RBushKnn.Test
 		{
 			RBush<Box> bush = new RBush<Box>();
 			bush.BulkLoad(boxes);
-			IEnumerable<Box> result = bush.KnnSearch(40, 40, 10);
+			IEnumerable<Box> result = bush.KnnToPointSearch(40, 40, 10);
 			Box[] mustBeReturned = Box.CreateBoxes(new double[,]
 			{{38,39,39,39},{35,39,38,40},{34,43,36,44},{29,42,33,42},
 				{48,38,48,40},{31,47,33,50},{34,29,34,32},
@@ -58,7 +58,7 @@ namespace RBushKnn.Test
 
 			try
 			{
-				IEnumerable<Box> result = bush.KnnSearch(40, 40, 1000);
+				IEnumerable<Box> result = bush.KnnToPointSearch(40, 40, 1000);
 			}
 			catch (Exception ex)
 			{
@@ -73,7 +73,7 @@ namespace RBushKnn.Test
 			RBush<Box> bush = new RBush<Box>();
 			bush.BulkLoad(boxes);
 
-			IEnumerable<Box> result = bush.KnnSearch(40, 40, 0, maxDist: 10);
+			IEnumerable<Box> result = bush.KnnToPointSearch(40, 40, 0, maxDist: 10);
 
 			foreach (Box resBox in result)
 			{
@@ -100,7 +100,7 @@ namespace RBushKnn.Test
 			RBush<Box> bush = new RBush<Box>();
 			bush.BulkLoad(boxes);
 
-			IEnumerable<Box> result = bush.KnnSearch(40, 40, 1, maxDist: 10);
+			IEnumerable<Box> result = bush.KnnToPointSearch(40, 40, 1, maxDist: 10);
 
 			Assert.True(result.Count() == 1);
 			Box resBox = result.First();
@@ -118,7 +118,7 @@ namespace RBushKnn.Test
 
 			try
 			{
-				IEnumerable<Box> result = bush.KnnSearch(40, 40, 1000, maxDist: 10);
+				IEnumerable<Box> result = bush.KnnToPointSearch(40, 40, 1000, maxDist: 10);
 			}
 			catch (Exception ex)
 			{
@@ -132,7 +132,7 @@ namespace RBushKnn.Test
 			= Box.CreateBoxes((new double[,] { { 1, 2, 1, 2 }, { 3, 3, 3, 3 }, { 5, 5, 5, 5 },
 				{ 4, 2, 4, 2 }, { 2, 4, 2, 4 }, { 5, 3, 5, 3 } }));
 
-		static RBushKnnTests()
+		static KnnToPointTests()
 		{
 			for (int i = 0; i < richData.Length; i++)
 			{
@@ -147,7 +147,7 @@ namespace RBushKnn.Test
 			RBush<Box> bush = new RBush<Box>();
 			bush.BulkLoad(richData);
 
-			IEnumerable<Box> result = bush.KnnSearch(2, 4, 1, b => b.Version < 5);
+			IEnumerable<Box> result = bush.KnnToPointSearch(2, 4, 1, b => b.Version < 5);
 
 			if (result.Count() == 1)
 			{
